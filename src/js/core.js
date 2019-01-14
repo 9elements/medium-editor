@@ -1157,6 +1157,16 @@
                             MediumEditor.util.removeTargetBlank(MediumEditor.selection.getSelectionStart(this.options.ownerDocument), targetUrl);
                         }
 
+                        if (this.options.rel || opts.rel === 'nofollow') {
+                            var rel = opts.rel;
+                            if (this.options.rel) {
+                                rel = this.options.rel;
+                            }
+                            MediumEditor.util.setRel(MediumEditor.selection.getSelectionStart(this.options.ownerDocument), targetUrl, rel);
+                        } else {
+                            MediumEditor.util.removeRel(MediumEditor.selection.getSelectionStart(this.options.ownerDocument), targetUrl);
+                        }
+
                         if (opts.buttonClass) {
                             MediumEditor.util.addClassToAnchors(MediumEditor.selection.getSelectionStart(this.options.ownerDocument), opts.buttonClass);
                         }

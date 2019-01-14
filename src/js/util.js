@@ -621,6 +621,42 @@
         },
 
         /*
+         * this function is called to explicitly set the rel
+         */
+        setRel: function (el, anchorUrl, rel) {
+            var i, url = anchorUrl || false;
+            if (el.nodeName.toLowerCase() === 'a') {
+                el.rel = rel;
+            } else {
+                el = el.getElementsByTagName('a');
+
+                for (i = 0; i < el.length; i += 1) {
+                    if (false === url || url === el[i].attributes.href.value) {
+                        el[i].rel = rel;
+                    }
+                }
+            }
+        },
+
+        /*
+         * this function is called to explicitly set the rel
+         */
+        removeRel: function (el, anchorUrl) {
+            var i;
+            if (el.nodeName.toLowerCase() === 'a') {
+                el.removeAttribute('rel');
+            } else {
+                el = el.getElementsByTagName('a');
+
+                for (i = 0; i < el.length; i += 1) {
+                    if (anchorUrl === el[i].attributes.href.value) {
+                        el[i].removeAttribute('rel');
+                    }
+                }
+            }
+        },
+
+        /*
          * this function adds one or several classes on an a element.
          * if el parameter is not an a, it will look for a children of el.
          * if no a children are found, it will look for the a parent.
